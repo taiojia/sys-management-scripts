@@ -1,5 +1,11 @@
-#! /bin/bash
-# file name: oo-requirements.sh
+#!/usr/bin/env bash
+#########################################
+#Function:    Install openshift orogin and requirements
+#Usage:       bash oo-install-origin-with-requirements.sh {target | broker | all-in-one}
+#Author:      Taio
+#E-Mail:      jiasir@icloud.com
+#Version:     1.0
+#########################################
 
 # install EPEL for CentOS 6
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm

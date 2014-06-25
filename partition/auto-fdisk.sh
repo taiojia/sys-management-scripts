@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #########################################
 #Function:    auto fdisk
-#Usage:       bash auto_fdisk.sh
+#Usage:       bash auto-fdisk.sh
 #Author:      Taio
 #E-Mail:      jiasir@icloud.com
 #Version:     1.0

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #########################################
 #Function:    Install the puppet master or agent on the machine
-#Usage:       bash puppet-installer.sh [master | agent]
+#Usage:       bash puppet-installer.sh {master | agent}
 #Author:      Taio
 #E-Mail:      jiasir@icloud.com
 #Version:     1.0

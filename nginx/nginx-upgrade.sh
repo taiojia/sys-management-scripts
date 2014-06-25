@@ -1,8 +1,12 @@
-#! /bin/bash
-# File name: nginx_upgrade.sh
-# Author jiasir@icloud.com
+#!/usr/bin/env bash
+#########################################
+#Function:    Edit the location for your nginx binary
+#Usage:       bash nginx-upgrade.sh upgrade
+#Author:      Taio
+#E-Mail:      jiasir@icloud.com
+#Version:     1.0
+#########################################
 
-# Edit the location for your nginx binary
 NGINX_BIN_LOCATION=/usr/sbin/nginx
 
 case $1 in
@@ -12,6 +16,6 @@ upgrade)
 	test -f /run/nginx.pid.oldbin && kill -QUIT `cat /run/nginx.pid.oldbin` && echo "SIGQUIT has been send to the nginx.pid.oldbin"
 	;;
 *)
-	echo "Usage: ./nginx_upgrade.sh upgrade"
+	echo "Usage: ./nginx-upgrade.sh upgrade"
 	exit 1
 esac
