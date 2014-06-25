@@ -1,0 +1,38 @@
+#!/bin/bash
+
+VIP=172.20.10.18
+
+case "$1" in
+
+start)
+export LANG=zh_CN
+echo "启动LVS客户端......"
+
+ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 up
+
+route add -host $VIP dev lo:0
+
+echo "1" > /proc/sys/net/ipv4/conf/lo/arp_ignore
+echo "2" > /proc/sys/net/ipv4/conf/lo/arp_announce
+echo "1" > /proc/sys/net/ipv4/conf/all/arp_ignore
+echo "2" > /proc/sys/net/ipv4/conf/all/arp_announce
+sysctl -p
+;;
+stop)
+echo "关闭LVS客户端......"
+
+ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 down
+
+route del -host $VIP dev lo:0
+
+echo "0" > /proc/sys/net/ipv4/conf/lo/arp_ignore
+echo "0" > /proc/sys/net/ipv4/conf/lo/arp_announce
+echo "0" > /proc/sys/net/ipv4/conf/all/arp_ignore
+echo "0" > /proc/sys/net/ipv4/conf/all/arp_announce
+sysctl -p
+;;
+*)
+echo "使用方法: $0 {start|stop}"
+exit 1
+esac
+

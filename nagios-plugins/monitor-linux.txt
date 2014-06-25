@@ -1,0 +1,23 @@
+useradd -s /sbin/nologin nagios
+passwd nagios
+tar -zxvf nagios-plugins-1.4.16.tar.gz
+cd nagios-plugins-1.4.16
+./configure --enable-redhat-pthread-workaround
+make
+make install
+cp /root/check_mem /usr/local/nagios/libexec
+chmod +x /usr/local/nagios/libexec/check_mem
+cd ..
+tar -zxvf nrpe-2.13.tar.gz
+cd nrpe-2.13
+./configure
+make all
+make install
+mkdir /usr/local/nagios/etc/
+cp /root/nrpe.cfg /usr/local/nagios/etc/nrpe.cfg
+chown -R nagios:nagios /usr/local/nagios
+/usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d
+vi /etc/rc.d/rc.local
+	/usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d
+
+	

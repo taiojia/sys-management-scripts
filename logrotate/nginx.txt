@@ -1,0 +1,21 @@
+#########################################
+#Function:    nginx log rotate
+#Usage:       The file will be in logrotate.d
+#Author:      Taio
+#E-Mail:      jiasir@icloud.com
+#Version:     1.0
+#########################################
+
+/usr/local/nginx/logs/*.log {
+daily
+dateext
+rotate 30
+missingok
+notifempty
+sharedscripts
+postrotate
+    if [ -f /usr/local/nginx/logs/nginx.pid ]; then
+        kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+    fi
+endscript
+}

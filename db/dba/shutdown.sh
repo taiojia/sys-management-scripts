@@ -1,0 +1,1 @@
+kill `ps -ef|grep -v grep|grep jinbao1.sh|awk '{print $2}'`

@@ -1,0 +1,11 @@
+# shangpin.repo
+# This is a shangpin local yum server
+#
+
+[shangpin]
+name=CentOS-6.4 - shangpin
+baseurl=http://172.20.10.222:81/iso/centos/6.4/x86_64/
+gpgcheck=0
+enabled=1
+
+

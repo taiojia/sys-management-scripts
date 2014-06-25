@@ -1,0 +1,24 @@
+@echo off
+set dirname=D:\ftp
+set servername=SQLSERVERAGENT
+set localip=172.20.30.5
+tasklist /FI "username eq SYSTEM" | find /C "SQLAGENT100.EXE" > %dirname%\temp.txt
+set /p num= < %dirname%\temp.txt
+del /F %dirname%\temp.txt
+echo %num%
+if "%num%" == "0"        net start %servername% || echo %date:~0,4%%date:~5,2%%date:~8,2% %time:~0,8% IP:%localip% %servername% start failure >> %dirname%\Error%date:~0,4%%date:~5,2%%date:~8,2%.txt
+if exist %dirname%\Error%date:~0,4%%date:~5,2%%date:~8,2%.txt (
+echo Error%date:~0,4%%date:~5,2%%date:~8,2%
+) else (
+exit
+)
+set File=%dirname%\info.txt
+>>"%File%" echo open 172.20.10.222 21
+>>"%File%" echo dba
+>>"%File%" echo dba20130
+>>"%File%" echo put "%dirname%\Error%date:~0,4%%date:~5,2%%date:~8,2%.txt"
+>>"%File%" echo bye
+ftp -v -i -s:"%File%"
+del %dirname%\info.txt
+del %dirname%\Error%date:~0,4%%date:~5,2%%date:~8,2%.txt
+exit

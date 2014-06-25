@@ -1,0 +1,9 @@
+# send by message
+define command{
+        command_name host-by-message
+        command_line /bin/echo -n "$NOTIFICATIONTYPE$ $HOSTNAME$/$HOSTADDRESS$: Host is $HOSTSTATE$ $SHORTDATETIME$" | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$ 2>&1 > /dev/null
+}
+define command{
+        command_name service-by-message
+        command_line /bin/echo -n "$NOTIFICATIONTYPE$ $HOSTNAME$/$HOSTADDRESS$: Service is $SERVICEDESC$ $SERVICESTATE$ $SHORTDATETIME$" | /usr/local/bin/gnokii --sendsms $CONTACTPAGER$ 2>&1 > /dev/null
+}

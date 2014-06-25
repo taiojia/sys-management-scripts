@@ -1,0 +1,1 @@
+nohup sh /home/dba/jinbao1.sh &

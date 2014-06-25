@@ -1,0 +1,71 @@
+#!/bin/bash
+#from network
+#This Nagios plugin can be checked your system memory status
+USAGE_Method="$(basename $0) [-w|--warning]<Free Percent> [-c|--critical]<Free Perecent>"
+USAGE_Value="WARNING value must be large than CRITICAL value:`basename $0` $*"
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+
+
+#设置Nagios要求的状态
+if [ $# -lt 4 ];then
+echo
+echo "Usage:$USAGE_Method"
+echo
+exit 0
+fi
+
+while [ $# -gt 0 ];do
+case "$1" in
+-w|--warning)
+shift
+WARNING=$1
+;;
+-c|--critical)
+shift
+CRITICAL=$1
+;;
+esac
+shift
+done
+
+
+if [[ $WARNING -eq $CRITICAL || $WARNING -lt $CRITICAL ]]
+then
+echo
+echo "$USAGE_Value"
+echo
+echo "Usage:$USAGE_Method"
+echo
+exit 0
+fi
+
+
+#取当前没使用的内存，注意是未使用！
+FREE_MEM=$(free -m|grep -|awk -F' ' '{print $4}') 
+#取当前系统总内存
+TOTAL_MEM=$(free -m|grep Mem|awk -F' ' '{print $2}')
+#使用bc输出百分比
+PERCENT=$( bc<<<"scale=2;621/977"|tr '^.' ' ')
+
+
+#如果监测百分比小于等于用户设置的严重错误值，返回2
+if [ $PERCENT -le $CRITICAL ];then
+echo "CRITICAL - $FREE_MEM MB ($PERCENT%) Free Memory"
+exit 2
+fi
+
+#如果百分比小于等于用户设置的警告值就警告并返回1
+if [ $PERCENT -le $WARNING ];then
+echo "WARNING - $FREE_MEM MB ($PERCENT%) Free Memory"
+exit 1
+fi
+
+
+#如果百分比大于用户设置的警告值就输出OK返回0
+if [ $PERCENT -gt $WARNING ];then
+echo "OK - $FREE_MEM MB ($PERCENT%) Free Memory"
+exit 0
+fi

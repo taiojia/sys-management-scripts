@@ -1,0 +1,6 @@
+#dnspod的两个NS记录解析
+dig ns3.dnsv5.com |awk '$1~"ns3.dnsv5.com."'|grep -v ";"|awk '{print $5}' >/tmp/ns3.txt
+dig ns4.dnsv5.com |awk '$1~"ns4.dnsv5.com."'|grep -v ";"|awk '{print $5}' >/tmp/ns4.txt
+#循环固定IP去解析预设的测试域名
+cat /tmp/ns3.txt | while read ns3 ; do dig @"$ns3" -f /tmp/domain.txt >>/tmp/dig_ns3_`date +%y%m%d`.txt; done
+cat /tmp/ns4.txt | while read ns4 ; do dig @"$ns4" -f /tmp/domain.txt >>/tmp/dig_ns4_`date +%y%m%d`.txt; done
