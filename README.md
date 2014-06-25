@@ -1,4 +1,4 @@
 sys-management-scripts
 ======================
 
-scripts for system management
+Scripts for system management
