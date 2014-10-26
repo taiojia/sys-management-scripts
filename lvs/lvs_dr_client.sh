@@ -1,12 +1,10 @@
 #!/bin/bash
 
-VIP=172.20.10.18
+VIP=$2
 
 case "$1" in
-
 start)
-export LANG=zh_CN
-echo "启动LVS客户端......"
+echo "Setting VIP......"
 
 ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 up
 
@@ -19,7 +17,7 @@ echo "2" > /proc/sys/net/ipv4/conf/all/arp_announce
 sysctl -p
 ;;
 stop)
-echo "关闭LVS客户端......"
+echo "Clean the VIP......"
 
 ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 down
 
@@ -32,7 +30,6 @@ echo "0" > /proc/sys/net/ipv4/conf/all/arp_announce
 sysctl -p
 ;;
 *)
-echo "使用方法: $0 {start|stop}"
+echo "Usage: $0 {start|stop} {VIP}"
 exit 1
 esac
-
