@@ -64,7 +64,7 @@ def print_file_stats(fname):
         print('%2s. %4s %s' % (i, count, word))
         i += 1
 
-        
+
 def main():
     print_file_stats('bill.txt')
 
