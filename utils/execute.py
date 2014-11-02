@@ -2,6 +2,7 @@ __author__ = 'jiasir (Taio Jia) <jiasir@icloud.com>'
 
 
 import subprocess
+import os
 
 
 class Execute():
@@ -11,3 +12,6 @@ class Execute():
 
 
 
+    def output_to_variable(self, *_command_line):
+    	_str = str(str, _command_line)
+    	return os.popen(_str).readlines()
