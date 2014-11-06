@@ -25,7 +25,7 @@ class Execute():
         """
         _str = _command_line
         return os.popen(_str).readlines()
-    
+
 
     def get_output(self, _command_line):
         """
