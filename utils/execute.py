@@ -12,6 +12,6 @@ class Execute():
 
 
 
-    def output_to_variable(self, *_command_line):
-    	_str = str(str, _command_line)
+    def output_to_variable(self, _command_line):
+    	_str = str(_command_line)
     	return os.popen(_str).readlines()
