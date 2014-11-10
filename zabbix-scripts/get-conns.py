@@ -10,18 +10,22 @@ arg = sys.argv[1]
 
 
 def est(port):
-    return commands.getoutput('netstat -tunpa | grep :{num} | grep EST | wc -l'.format(num=port))
+    return commands.getoutput('sudo netstat -tunpa | grep :{num} | grep EST | grep -v grep | wc -l'.format(num=port))
 
 
 def time_out(port):
-    return commands.getoutput('netstat -tunpa | grep :{num} | grep TIME_WAIT | wc -l'.format(num=port))
+    return commands.getoutput('sudo netstat -tunpa | grep :{num} | grep TIME_WAIT | grep -v grep | wc -l'.format(num=port))
 
 
 if __name__ == '__main__' and not len(arg) == 2:
     if arg == 'EST_80':
         print est('80')
+    if arg == 'EST_8080':
+        print est('8080')
     if arg == 'TIME_OUT_80':
         print time_out('80')
+    if arg == 'TIME_OUT_8080':
+        print time_out('8080')
     if arg == 'EST_3306':
         print est('3306')
     if arg == 'TIME_OUT_3306':
