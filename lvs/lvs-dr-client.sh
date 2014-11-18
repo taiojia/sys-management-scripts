@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #########################################
 #Function:    Set or remove the VIP for LVS dr mode
-#Usage:       bash lvs-dr-client.sh {start|stop}
+#Usage:       bash lvs-dr-client.sh {start|stop} {VIP}
 #Author:      Taio
 #E-Mail:      jiasir@icloud.com
 #Version:     1.0
 #########################################
 
 # Define VIP
-VIP=172.20.10.18
+VIP=$2
 
 case "$1" in
 
