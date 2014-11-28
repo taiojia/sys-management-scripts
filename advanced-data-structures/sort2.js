@@ -103,3 +103,4 @@ tab = function(n) {
 traverse(root, function(node, level) {
   return console.log(tab(level), node.id);
 });
+
