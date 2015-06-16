@@ -15,7 +15,7 @@ def get_site_status(url):
     try:
         urlfile = urllib2.urlopen(url)
         status_code = urlfile.code
-        logger.info(status_code)
+        logger.info('{code} {link}'.format(code=status_code, link=url))
         if status_code in (200, 302):
             return 'up', urlfile
     except:
