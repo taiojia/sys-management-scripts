@@ -32,7 +32,7 @@ def get_site_status(url):
             return 'up', urlfile
     except Exception as e:
         logger.error(e)
-        [notify_msg(i, '{}%20cant%20access%20{}'.format(hostname, url[7:])) for i in p]
+        [notify_msg(i, '{}%20cant%20access%20{}'.format(hostname, url[8:])) for i in p]
 
     return 'down', None
 
