@@ -25,7 +25,7 @@ def notify_msg(phone, msg):
 
 def get_site_status(url):
     try:
-        urlfile = urllib2.urlopen(url, timeout=3)
+        urlfile = urllib2.urlopen(url, timeout=6)
         status_code = urlfile.code
         logger.info('{code} {link}'.format(code=status_code, link=url))
         if status_code in (200, 302):
