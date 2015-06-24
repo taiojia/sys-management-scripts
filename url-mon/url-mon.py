@@ -39,8 +39,8 @@ def get_site_status(url):
 
 if __name__ == '__main__':
     i = 0
-    while i < 24:
+    while i < 3:
         i += 1
         print i
         get_site_status(url)
-        time.sleep(20)
+        time.sleep(300)
