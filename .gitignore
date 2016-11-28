@@ -61,4 +61,5 @@ target/
 .idea
 *.iml
 
-
+# VirtualEnv
+venv/
